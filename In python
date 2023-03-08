@@ -1,0 +1,33 @@
+import math
+
+def compute_grade(letters, words, sentences, text):
+    L = letters / words * 100
+    S = sentences / words * 100
+    index = round(0.0588 * L - 0.296 * S - 15.8)
+    return index
+
+def count_letters(text):
+    return sum(1 for char in text if char.isalpha())
+
+def count_words(text):
+    return len(text.split())
+
+def count_sentences(text):
+    sent = 0
+    for char in text:
+        if char in ".!?":
+            sent += 1
+    return sent
+
+text = input("Text: ")
+letters = count_letters(text)
+words = count_words(text)
+sentences = count_sentences(text)
+index = compute_grade(letters, words, sentences, text)
+
+if index < 1:
+    print("Before Grade 1")
+elif index >= 16:
+    print("Grade 16+")
+else:
+    print(f"Grade {index}")
